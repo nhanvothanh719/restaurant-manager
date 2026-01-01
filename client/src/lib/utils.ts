@@ -3,6 +3,7 @@ import { twMerge } from 'tailwind-merge';
 import { UseFormSetError } from 'react-hook-form';
 import { UnprocessableEntityError } from '@/lib/http';
 import { toast } from 'sonner';
+import { ACCESS_TOKEN, REFRESH_TOKEN } from '@/constants/localStorageKeys';
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -41,4 +42,14 @@ export const handleApiError = ({
   } else {
     toast.error(`${error.payload.message}`, { duration: toastDuration });
   }
+};
+
+export const getAccessTokenFromLocalStorage = () => {
+  if (typeof window === 'undefined') return null;
+  return localStorage.getItem(ACCESS_TOKEN);
+};
+
+export const getRefreshTokenFromLocalStorage = () => {
+  if (typeof window === 'undefined') return null;
+  return localStorage.getItem(REFRESH_TOKEN);
 };

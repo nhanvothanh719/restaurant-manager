@@ -1,5 +1,6 @@
 'use client';
 
+import { useAuth } from '@/hooks/useAuth';
 import Link from 'next/link';
 
 const menuItems = [
@@ -10,6 +11,7 @@ const menuItems = [
   {
     title: 'Đơn hàng',
     href: '/orders',
+    authRequired: true,
   },
   {
     title: 'Đăng nhập',
@@ -24,11 +26,27 @@ const menuItems = [
 ];
 
 export default function NavItems({ className }: { className?: string }) {
-  return menuItems.map((item) => {
-    return (
-      <Link href={item.href} key={item.href} className={className}>
-        {item.title}
-      </Link>
-    );
-  });
+  const { isReady, isAuthenticated } = useAuth();
+
+  // Avoid rendering auth-dependent items until after client mount.
+  // This prevents server/client markup mismatch during hydration.
+  if (!isReady) return null;
+
+  return (
+    <>
+      {menuItems.map((item) => {
+        if (
+          (item.authRequired === false && isAuthenticated) ||
+          (item.authRequired === true && !isAuthenticated)
+        )
+          return null;
+
+        return (
+          <Link href={item.href} key={item.href} className={className}>
+            {item.title}
+          </Link>
+        );
+      })}
+    </>
+  );
 }
