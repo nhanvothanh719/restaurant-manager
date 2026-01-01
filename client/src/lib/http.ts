@@ -136,7 +136,7 @@ const request = async <Response>(
 
   if (typeof window !== 'undefined') {
     const normalizedPath = normalizePath(url);
-    if (normalizedPath === 'api/auth/login ') {
+    if (normalizedPath === 'api/auth/login') {
       const { accessToken, refreshToken } = (payload as LoginResType).data;
       localStorage.setItem(ACCESS_TOKEN, accessToken);
       localStorage.setItem(REFRESH_TOKEN, refreshToken);
