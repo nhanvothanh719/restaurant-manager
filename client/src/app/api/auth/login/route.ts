@@ -25,6 +25,13 @@ export async function POST(request: Request) {
     const decodedAccessToken = jwt.decode(accessToken) as DecodedTokenType;
     const decodedRefreshToken = jwt.decode(refreshToken) as DecodedTokenType;
 
+    if (!decodedAccessToken || !decodedRefreshToken) {
+      return Response.json(
+        { message: 'Invalid token format' },
+        { status: 500 }
+      );
+    }
+
     // Set expiration time for cookies
     cookieStore.set(ACCESS_TOKEN_COOKIE_KEY, accessToken, {
       path: '/',
@@ -48,7 +55,7 @@ export async function POST(request: Request) {
     }
     return Response.json(
       {
-        message: 'Fail to login',
+        message: 'Failed to login',
       },
       { status: 500 }
     );
