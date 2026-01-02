@@ -14,15 +14,14 @@ import { useLogoutMutation } from '@/queries/useAuth';
 import { handleApiError } from '@/lib/utils';
 import { toast } from 'sonner';
 import { useRouter } from 'next/navigation';
-
-const account = {
-  name: 'Nguyễn Văn A',
-  avatar: 'https://i.pravatar.cc/150',
-};
+import { useCurrentUserProfile } from '@/hooks/useAccount';
 
 export default function DropdownAvatar() {
   const router = useRouter();
   const logoutMutation = useLogoutMutation();
+
+  const { data } = useCurrentUserProfile();
+  const account = data?.payload.data;
 
   const handleLogout = async () => {
     if (logoutMutation.isPending) return;
@@ -46,15 +45,18 @@ export default function DropdownAvatar() {
           className="overflow-hidden rounded-full"
         >
           <Avatar>
-            <AvatarImage src={account.avatar ?? undefined} alt={account.name} />
+            <AvatarImage
+              src={account?.avatar ?? undefined}
+              alt={account?.name}
+            />
             <AvatarFallback>
-              {account.name.slice(0, 2).toUpperCase()}
+              {account?.name.slice(0, 2).toUpperCase()}
             </AvatarFallback>
           </Avatar>
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
-        <DropdownMenuLabel>{account.name}</DropdownMenuLabel>
+        <DropdownMenuLabel>{account?.name}</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuItem asChild>
           <Link href={'/manage/setting'} className="cursor-pointer">
