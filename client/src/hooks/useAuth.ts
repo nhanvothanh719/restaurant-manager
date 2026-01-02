@@ -1,5 +1,5 @@
-import { getAccessTokenFromLocalStorage } from "@/lib/utils";
-import { useEffect, useState } from "react";
+import { getAccessTokenFromLocalStorage } from '@/lib/utils';
+import { useEffect, useState } from 'react';
 
 export const useAuth = () => {
   const [isReady, setIsReady] = useState(false);
