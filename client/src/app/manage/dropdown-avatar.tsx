@@ -14,7 +14,7 @@ import { useLogoutMutation } from '@/queries/useAuth';
 import { handleApiError } from '@/lib/utils';
 import { toast } from 'sonner';
 import { useRouter } from 'next/navigation';
-import { useCurrentUserProfile } from '@/hooks/useAccount';
+import { useCurrentUserProfile } from '@/queries/useAccount';
 
 export default function DropdownAvatar() {
   const router = useRouter();
