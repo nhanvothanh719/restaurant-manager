@@ -37,7 +37,7 @@ export default function Home() {
                 </div>
                 <div className="space-y-1">
                   <h3 className="text-xl font-semibold">Bánh mì</h3>
-                  <p className="">Bánh mì sandwidch</p>
+                  <p className="">Bánh mì sandwich</p>
                   <p className="font-semibold">123,123đ</p>
                 </div>
               </div>
