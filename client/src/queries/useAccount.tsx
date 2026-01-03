@@ -16,6 +16,6 @@ export const useUpdateCurrentUserProfileMutation = () => {
 
 export const useChangePasswordMutation = () => {
   return useMutation({
-    mutationFn: accountApiRequest.changePassword,
+    mutationFn: accountApiRequest.clientChangePasswordV2,
   });
 };

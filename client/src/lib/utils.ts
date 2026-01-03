@@ -53,3 +53,11 @@ export const getRefreshTokenFromLocalStorage = () => {
   if (typeof window === 'undefined') return null;
   return localStorage.getItem(REFRESH_TOKEN);
 };
+
+export const setAccessTokenToLocalStorage = (value: string) => {
+  return localStorage.setItem(ACCESS_TOKEN, value);
+};
+
+export const setRefreshTokenToLocalStorage = (value: string) => {
+  return localStorage.setItem(REFRESH_TOKEN, value);
+};
